@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      -  id: products-service
+         uri:  lb://products-service
+         predicates:           -  Path=/api/products/**
+           -  Method=GET, POST
+           #-  Header=Content-Type, application/json
+         filters:           -  StripPrefix=2
+           -  name: FilterAddCookie #ExampleGatewayFilterFactory
+              args:
+                message: Este es un ejemplo de filtro
+                cookieName: username
+                cookieValue: ElBarto
+           
+      -  id: items-service
+         uri:  lb://items-service
+         predicates:
+           -  Path=/api/items/**
+         filters:
+           -  StripPrefix=2  
