@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 //import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 //import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 public class AppConfig {
 	
 	@Bean(name = "clientRest")
+	@LoadBalanced
 	public RestTemplate registerRestTemplate() {
 		return new RestTemplate();
 	}

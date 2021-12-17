@@ -14,8 +14,12 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.items.app.models.Item;
@@ -37,6 +41,7 @@ public class ItemController {
 	private CircuitBreakerFactory circuitBreakerFactory;
 	
 	@Qualifier("serviceFeign")
+	//@Qualifier("serviceRTemplate")
 	private IItemService itemService;
 
 	@Autowired
@@ -46,6 +51,7 @@ public class ItemController {
 
 	@GetMapping
 	public ResponseEntity<?> getAll() {
+		logger.info(itemService.getClass().toString());
 		List<Item> items = itemService.findAll();
 
 		if (items.isEmpty()) {
@@ -92,5 +98,33 @@ public class ItemController {
 		}
 		
 		return new ResponseEntity<Map<String, String>>(info, HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<?> save(@RequestBody Product product) {
+		Product tmpProduct = itemService.save(product);
+		
+		if (tmpProduct != null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(tmpProduct);
+		}
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	}
+	
+	@PutMapping(value="/{id}")
+	public ResponseEntity<?> update(@RequestBody Product product, @PathVariable Long id) {
+		Product tmpProduct = itemService.update(product, id);
+		
+		if (tmpProduct != null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(tmpProduct);
+		}
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	}
+	
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		itemService.delete(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }

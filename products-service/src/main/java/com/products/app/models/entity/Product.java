@@ -24,7 +24,7 @@ public class Product implements Serializable{
 
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
-	private Date creatredAt;
+	private Date createdAt;
 
 	public Long getId() {
 		return id;
@@ -50,12 +50,12 @@ public class Product implements Serializable{
 		this.price = price;
 	}
 
-	public Date getCreatredAt() {
-		return creatredAt;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreatredAt(Date creatredAt) {
-		this.creatredAt = creatredAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	
 	/**
