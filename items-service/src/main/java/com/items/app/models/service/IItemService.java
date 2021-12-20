@@ -3,7 +3,7 @@ package com.items.app.models.service;
 import java.util.List;
 
 import com.items.app.models.Item;
-import com.items.app.models.Product;
+import com.commons.app.models.entity.Product;
 
 public interface IItemService {
 	public abstract List<Item> findAll();

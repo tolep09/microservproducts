@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.items.app.models.Item;
-import com.items.app.models.Product;
+import com.commons.app.models.entity.Product;
 import com.items.app.models.service.IItemService;
 
 @RefreshScope

@@ -13,19 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.items.app.models.Product;
+import com.commons.app.models.entity.Product;
 
 //@FeignClient(name = "products-service", url = "localhost:8081/api/products")
 @FeignClient(name = "products-service")
 public interface ProductClientRest {
-//	@GetMapping
-//	public List<Product> findAll();
-	
+
 	@GetMapping
 	public ResponseEntity<List<Product>> getAll();
-	
-//	@GetMapping(value = "/{id}")
-//	public Product findById(@PathVariable (name = "id") Long id);
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable(name="id") Long id);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.items.app.clients.ProductClientRest;
 import com.items.app.models.Item;
-import com.items.app.models.Product;
+import com.commons.app.models.entity.Product;
 
 @Service("serviceFeign")
 @Primary // indicar que es el que se debe inyectar en el controller
