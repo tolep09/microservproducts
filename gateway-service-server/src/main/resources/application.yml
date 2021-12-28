@@ -45,4 +45,23 @@ spring:
          predicates:
            -  Path=/api/items/**
          filters:
-           -  StripPrefix=2  
+           -  StripPrefix=2
+      #para oauth
+      -  id: oauth-service
+         uri:  lb://oauth-service
+         predicates:
+           -  Path=/api/security/**
+         filters:
+           -  StripPrefix=2 
+      #para users
+      -  id: users-service
+         uri:  lb://users-service
+         predicates:
+           -  Path=/api/users/**
+         filters:
+           -  StripPrefix=2   
+           
+           
+           
+           
+   
